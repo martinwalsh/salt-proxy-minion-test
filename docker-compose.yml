@@ -1,0 +1,17 @@
+version: '3'
+services:
+  salt:
+    build:
+      context: master
+  minion:
+    build:
+      context: minion
+    depends_on:
+      - salt
+  rest:
+    build:
+      context: rest-application
+    ports:
+      - '8000:8000'
+    depends_on:
+      - minion
